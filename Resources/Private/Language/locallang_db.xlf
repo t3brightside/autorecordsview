@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-05-23T12:00:00Z" product-name="autorecordsview">
+        <header/>
+        <body>
+            <trans-unit id="pages.tx_autorecordsview_force">
+                <source>Force Records View</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
