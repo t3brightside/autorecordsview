@@ -46,7 +46,7 @@ class AutorecordsviewMiddleware implements MiddlewareInterface
 
             $queryBuilder = $this->connectionPool->getQueryBuilderForTable('pages');
             $forceListMode = $queryBuilder
-                ->select('tx_autolistmode_force')
+                ->select('tx_autorecordsview_force')
                 ->from('pages')
                 ->where(
                     $queryBuilder->expr()->eq(
@@ -60,7 +60,7 @@ class AutorecordsviewMiddleware implements MiddlewareInterface
             // STEP 1: Entering a forced layout destination -> Pivot to List module
             if ($forceListMode && $currentIdentifier === 'web_layout') {
                 if ($backendUser !== null) {
-                    $backendUser->setAndSaveSessionData('tx_autolistmode_was_forced', true);
+                    $backendUser->setAndSaveSessionData('tx_autorecordsview_was_forced', true);
                 }
 
                 $listUrl = (string)$this->uriBuilder->buildUriFromRoute('records', ['id' => $pageId]);
@@ -69,11 +69,11 @@ class AutorecordsviewMiddleware implements MiddlewareInterface
             
             // STEP 2: User clicks away to an unforced standard page from a forced state
             if (!$forceListMode && $currentIdentifier === 'records') {
-                $wasForced = $backendUser !== null ? (bool)$backendUser->getSessionData('tx_autolistmode_was_forced') : false;
+                $wasForced = $backendUser !== null ? (bool)$backendUser->getSessionData('tx_autorecordsview_was_forced') : false;
 
                 if ($wasForced) {
                     if ($backendUser !== null) {
-                        $backendUser->setAndSaveSessionData('tx_autolistmode_was_forced', false);
+                        $backendUser->setAndSaveSessionData('tx_autorecordsview_was_forced', false);
                     }
 
                     $layoutUrl = (string)$this->uriBuilder->buildUriFromRoute('web_layout', ['id' => $pageId]);
@@ -83,9 +83,9 @@ class AutorecordsviewMiddleware implements MiddlewareInterface
 
             // STEP 3: Handle manual list browsing safety
             if ($forceListMode && $currentIdentifier === 'records') {
-                $wasForced = $backendUser !== null ? (bool)$backendUser->getSessionData('tx_autolistmode_was_forced') : false;
+                $wasForced = $backendUser !== null ? (bool)$backendUser->getSessionData('tx_autorecordsview_was_forced') : false;
                 if (!$wasForced && $backendUser !== null) {
-                    $backendUser->setAndSaveSessionData('tx_autolistmode_was_forced', false);
+                    $backendUser->setAndSaveSessionData('tx_autorecordsview_was_forced', false);
                 }
             }
         }
