@@ -2,7 +2,6 @@
     "name": "t3brightside/autorecordsview",
     "type": "typo3-cms-extension",
     "description": "Automatically switches to records mode for specific pages in the TYPO3 backend.",
-    "type": "typo3-cms-extension",
 	"keywords": ["TYPO3", "UX", "records", "list mode", "backend"],
 	"license": "GPL-2.0-or-later",
 	"homepage": "https://t3brightside.com",
